@@ -1,48 +1,48 @@
 # Reactive forms
 
-Reactive forms provide a model-driven approach to handling form inputs whose values change over time. This guide shows you how to create and update a basic form control, progress to using multiple controls in a group, validate form values, and create dynamic forms where you can add or remove controls at run time.
+Los formularios reactivos proveen un enfoque basado en modelos para manipular entradas de formularios cuyos valores cambian en el tiempo. Esta guía te muestra cómo crear y actualizar un básico control de formulario, usar múltiples controles en un grupo, validar valores, y crear formularios dinámicos donde puedes agregar o remover controles en tiempo de ejecución.
 
 <div class="alert is-helpful">
 
-Try this <live-example title="Reactive Forms in Stackblitz">Reactive Forms live-example</live-example>.
+Prueba este ejemplo en linea <live-example title="Formularios reactivos en Stackblitz">Formularios reactivos</live-example>.
 
 </div>
 
-**Prerequisites**
+**Prerequisitos**
 
-Before going further into reactive forms, you should have a basic understanding of the following:
+Antes de profundizar en los formularios reactivos, deberías tener una comprensión básica de lo siguiente:
 
-* [TypeScript](https://www.typescriptlang.org/ "The TypeScript language") programming.
-* Angular app-design fundamentals, as described in [Angular Concepts](guide/architecture "Introduction to Angular concepts.").
-* The form-design concepts that are presented in [Introduction to Forms](guide/forms-overview "Overview of Angular forms.").
-
+* Programacion en [TypeScript](https://www.typescriptlang.org/ "El lenguaje TypeScript").
+* Fundamentos de diseño de apps Angular, como se describe en [ Conceptos de Angular](guide/architecture "Introducción a los conceptos de Angular.").
+* Los conceptos de diseño de formularios que son presentados en [Introducción a formularios](guide/forms-overview "Visión general a los formularios en Angular.").
 {@a intro}
 
-## Overview of reactive forms
 
-Reactive forms use an explicit and immutable approach to managing the state of a form at a given point in time. Each change to the form state returns a new state, which maintains the integrity of the model between changes. Reactive forms are built around [observable](guide/glossary#observable "Observable definition.") streams, where form inputs and values are provided as streams of input values, which can be accessed synchronously.
+## Vista general a los Formularios Reactivos
 
-Reactive forms also provide a straightforward path to testing because you are assured that your data is consistent and predictable when requested. Any consumers of the streams have access to manipulate that data safely.
+Los Formularios Reactivos utilizan un enfoque explícito e inmutable para gestionar el estado de un formulario en un momento dado. Cada cambio en el estado del formulario devuelve un nuevo estado, que mantiene la integridad del modelo entre cambios. Las formularios reactivos se construyen alrededor de un [observable](guide/glossary#observable "Definición de Observable."),  donde las entradas y sus valores se proporcionan como flujos de valores de entrada, a los que se puede acceder sincrónicamente.
 
-Reactive forms differ from [template-driven forms](guide/forms "Template-driven forms guide") in distinct ways. Reactive forms provide more predictability with synchronous access to the data model, immutability with observable operators, and change tracking through observable streams.
+También ofrecen un camino sencillo para pruebas ya que te puedes asegurar de que tus datos son consistentes y predecibles cuando son solicitados. Cualquier consumidor de los streams tiene acceso a manipular los datos en forma segura.
 
-Template-driven forms allow direct access to modify data in your template, but are less explicit than reactive forms because they rely on directives embedded in the template, along with mutable data to track changes asynchronously. See the [Forms Overview](guide/forms-overview "Overview of Angular forms.") for detailed comparisons between the two paradigms.
+Difieren de los [Formularios basados en plantillas](guide/forms "Guia de Formularios basados en plantillas") en distintas maneras. Proveen más previsibilidad con un acceso sincrónico al modelo de datos, inmutabilidad con operadores observables, y seguimiento de cambios mediantes streams de observables.
 
-## Adding a basic form control
+Los formularios basados en plantillas permiten el acceso directo para modificar datos en su plantilla, pero son menos explícitos que los formularios reactivos porque se basan en directivas integradas en la plantilla, junto con datos mutables para realizar un seguimiento de los cambios de forma asincrónica. Vea [Vista general a los formularios en Angular](guide/forms-overview "Vista general a los formularios en Angular.") para una comparación más detallada entre los dos paradigmas.
 
-There are three steps to using form controls.
+## Agregando un control de formulario básico. 
 
-1. Register the reactive forms module in your app. This module declares the reactive-form directives that you need to use reactive forms.
-2. Generate a new `FormControl` instance and save it in the component.
-3. Register the `FormControl` in the template.
+Hay tres pasos para usar un control de formulario.
 
-You can then display the form by adding the component to the template.
+1. Registrar el módulo de Formularios Reactivos en su aplicación. Este módulo declara las directivas que necesita para usar Formularios Reactivos.
+2. Generar una nueva instancia de `FormControl` y guardarlo en el componente.
+3. Registrar el `FormControl` en la plantilla.
 
-The following examples show how to add a single form control. In the example, the user enters their name into an input field, captures that input value, and displays the current value of the form control element.
+Luego puede mostrar el formulario agregando el componente a la plantilla.
 
-**Register the reactive forms module**
+Los siguientes ejemplos muestran cómo agregar un único control de formulario. En el ejemplo, el usuario ingresa su nombre en un campo de entrada, captura ese valor de entrada y muestra el valor actual del elemento de control de formulario.
 
-To use reactive form controls, import `ReactiveFormsModule` from the `@angular/forms` package and add it to your NgModule's `imports` array.
+**Registrar el módulo de Formularios Reactivos**
+
+Para usar los controles de los Formularios Reactivos, tiene que importar `ReactiveFormsModule` desde el paquete `@angular/forms` y agregarlo al array `imports` de su NgModule.
 
 <code-example path="reactive-forms/src/app/app.module.ts" region="imports" header="src/app/app.module.ts (excerpt)"></code-example>
 
